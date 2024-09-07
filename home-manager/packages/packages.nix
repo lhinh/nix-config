@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 {
   home-manager.users.slippy.home.packages = with pkgs; [
-    discord
+    (discord.overrideAttrs (oldAttrs: {
+        postInstall = ''
+          wrapProgram $out/bin/discord --add-flags "--disable-gpu"
+        '';
+      }))
   ];
 }
