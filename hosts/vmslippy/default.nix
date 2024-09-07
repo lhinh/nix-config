@@ -10,10 +10,20 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
+  # Using proper kernel modules for vm.
+  boot.kernelModules = [ 
+    "vmw_balloon"
+    "vmwgfx"
+    "vsock"
+  ];
+
   networking.hostName = "vmslippy";
 
   # Install VMtools
   virtualisation.vmware.guest.enable = true;
+
+  # Use vmware video driver.
+  services.xserver.videoDrivers = [ "vmware" ];
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
