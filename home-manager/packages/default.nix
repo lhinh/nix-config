@@ -4,5 +4,6 @@
     ./git.nix
     ./vscodium.nix
     ./ssh.nix
+    ./packages.nix
   ];
 }
