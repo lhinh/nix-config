@@ -29,6 +29,9 @@
           ./modules/node
           ./modules/svelte
           ./modules/code-cursor
+          ./modules/docker
+          ./modules/python3
+          ./modules/virtualenv
         ];
       };
     };
