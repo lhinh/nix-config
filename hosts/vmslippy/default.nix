@@ -22,6 +22,10 @@
   # Install VMtools
   virtualisation.vmware.guest.enable = true;
 
+  # Enable Docker daemon
+  virtualisation.docker.enable = true;
+
+
   # Use vmware video driver.
   services.xserver.videoDrivers = [ "vmware" ];
 
