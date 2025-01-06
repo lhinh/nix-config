@@ -19,7 +19,7 @@
     nixosConfigurations = {
       lyr00 = inputs.nixpkgs-2411.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = inputs;
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/lyr00
 
