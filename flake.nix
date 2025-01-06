@@ -29,6 +29,7 @@
           ./modules/base
           ./modules/firefox
           ./modules/gimp
+          ./modules/kgpg
           ./modules/parsec
           ./modules/docker
           ./modules/vscodium
