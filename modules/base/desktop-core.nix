@@ -10,8 +10,6 @@
     variant = "";
   };
 
-
-  sound.enable = true;
   hardware.pulseaudio.enable = true;
   # # Enable sound with pipewire.
   security.rtkit.enable = true;

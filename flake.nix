@@ -33,7 +33,7 @@
 
       vmslippy = inputs.nixpkgs-2405.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = inputs;
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/vmslippy
 
@@ -49,22 +49,9 @@
           ./modules/maven
           ./modules/node
           ./modules/svelte
-#           ./modules/vscode
-
-#           inputs.home-manager-2405.nixosModules.home-manager {
-#             home-manager.useGlobalPkgs = true;
-#             home-manager.useUserPackages = true;
-#
-#             home-manager.users.slippy = import ./home.nix;
-#           }
-
-
+          ./modules/code-cursor
         ];
       };
-
-#       wslippy = nixpkgs-2405.lib.nixosSystem {
-#         system = "x86_64-linux"
-#       }
     };
   };
 }
