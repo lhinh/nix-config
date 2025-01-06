@@ -29,7 +29,7 @@
           ./modules/base
           ./modules/firefox
           ./modules/gimp
-          ./modules/kgpg
+          ./modules/gpg
           ./modules/parsec
           ./modules/docker
           ./modules/vscodium
