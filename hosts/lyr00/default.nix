@@ -11,8 +11,15 @@
 
   networking.hostName = "lyr00";
 
-  # Install VMtools
-  virtualisation.vmware.guest.enable = true;
+  # Remote Desktop Protocol configurations with xRDP
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "startplasma-x11";
+  networking.firewall.allowedTCPPorts = [ 3389 ];
+  # services.xrdp.openFirewall = true;
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;

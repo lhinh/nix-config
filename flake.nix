@@ -30,6 +30,7 @@
           ./modules/firefox
           ./modules/gimp
           ./modules/gpg
+          ./modules/krdp
           ./modules/parsec
           ./modules/docker
           ./modules/vscodium
