@@ -28,7 +28,10 @@
 
           ./modules/base
           ./modules/firefox
+          ./modules/gimp
           ./modules/parsec
+          ./modules/docker
+          ./modules/vscodium
         ];
       };
 
