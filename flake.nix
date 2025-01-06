@@ -24,10 +24,11 @@
           ./hosts/lyr00
 
           (import "${inputs.home-manager-2411}/nixos")
-          (import ./home-manager/lyr00.nix (stateVersion = "24.11";))
+          (import ./home-manager/lyr00.nix {stateVersion = "24.11";})
 
           ./modules/base
           ./modules/firefox
+          ./modules/parsec
         ];
       };
 
@@ -38,7 +39,7 @@
           ./hosts/vmslippy
 
           (import "${inputs.home-manager-2405}/nixos")
-          (import ./home-manager (stateVersion = "24.05";))
+          (import ./home-manager {stateVersion = "24.05";})
 
           ./modules/base
           ./modules/firefox
