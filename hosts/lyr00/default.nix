@@ -31,6 +31,18 @@
   # Set default editor to vim.
   environment.variables.EDITOR = "vim";
 
+  # Mount file share
+  environment.systemPackages = [ pkgs.cifs-utils ];
+  fileSystems."/mnt/share" = {
+    device = "//192.168.1.210/volume1/Tesseract";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+    in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
