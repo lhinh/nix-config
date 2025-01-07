@@ -11,19 +11,22 @@
 
   networking.hostName = "lyr00";
 
-  # Remote Desktop Protocol configurations with xRDP
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
-
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "startplasma-x11";
-  networking.firewall.allowedTCPPorts = [ 3389 ];
-  # services.xrdp.openFirewall = true;
-
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "slippy";
+
+  # Enable OpenSSH
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = true;
+      AllowUsers = [ "slippy" ]; # Allows all users by default. Can be [ "user1" "user2" ]
+      # UseDns = true;
+      X11Forwarding = false;
+      PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+    };
+  };
 
   # Set default editor to vim.
   environment.variables.EDITOR = "vim";
