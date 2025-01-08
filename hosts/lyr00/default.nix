@@ -9,7 +9,22 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Enable Docker.
+  virtualisation.docker.enable = true;
+  users.users.slippy.extraGroups= [ "docker" ];
+
+  # Networking
   networking.hostName = "lyr00";
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 8324 32400 32469];
+    allowedUDPPortRanges = [
+      { from = 4000; to = 4007; }
+      { from = 8000; to = 8010; }
+      { from = 32410; to = 32414; }
+    ];
+  };
+
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
@@ -34,7 +49,7 @@
   # Mount file share
   environment.systemPackages = [ pkgs.cifs-utils ];
   fileSystems."/mnt/share" = {
-    device = "//192.168.1.210/volume1/Tesseract";
+    device = "//192.168.1.210/Tesseract";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split
