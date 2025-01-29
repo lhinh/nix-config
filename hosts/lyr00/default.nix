@@ -25,6 +25,20 @@
     ];
   };
 
+  # Intel video drivers
+  nixpkgs.config.packageOverrides = pkgs: {
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver  # LIBVA_DRIVER_NAME=iHD
+      vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable
+      # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
+      # intel-media-sdk   # for older GPUs
+    ];
+  };
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 
   # Enable automatic login for the user.
   # services.displayManager.autoLogin.enable = true;
@@ -35,7 +49,7 @@
     enable = true;
     ports = [ 22 ];
     settings = {
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
       AllowUsers = [ "slippy" ]; # Allows all users by default. Can be [ "user1" "user2" ]
       # UseDns = true;
       X11Forwarding = false;
