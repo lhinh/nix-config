@@ -11,14 +11,13 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  system.fsPackages = [ pkgs.open-vm-tools ];
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/ea06980b-044b-4a10-92fa-19c7497375e0";
       fsType = "ext4";
     };
 
-  fileSystems."/mount/share" =
+  system.fsPackages = [ pkgs.open-vm-tools ];
+  fileSystems."/mnt/host-share" =
     { device = ".host:/vm-shares";
       fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
       options = [ "umask=22" "uid=1000" "gid=100" "allow_other" "defaults" "auto_unmount" ];
