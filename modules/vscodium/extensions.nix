@@ -13,6 +13,7 @@
         dbaeumer.vscode-eslint
         yzhang.markdown-all-in-one
         svelte.svelte-vscode
+        bbenoist.nix
       ];
     })
   ];

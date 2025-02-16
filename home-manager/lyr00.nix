@@ -1,6 +1,7 @@
 {stateVersion} : { config, pkgs, lib, ... } : {
   imports = [
-    ./packages
+    ./packages/git.nix
+    ./packages/ssh.nix
   ];
 
   users.users.slippy = {
