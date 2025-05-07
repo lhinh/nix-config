@@ -58,6 +58,7 @@
           ./modules/svelte
           ./modules/code-cursor
           ./modules/docker
+          ./modules/discord
           ./modules/python3
           ./modules/virtualenv
         ];
