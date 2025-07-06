@@ -17,11 +17,12 @@
   networking.hostName = "lyr00";
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 8324 32400 32469];
+    allowedTCPPorts = [ 80 443 8324 32469];
     allowedUDPPortRanges = [
       { from = 4000; to = 4007; }
       { from = 8000; to = 8010; }
       { from = 32410; to = 32414; }
+      { from = 41641; to = 41641; }
     ];
   };
 
