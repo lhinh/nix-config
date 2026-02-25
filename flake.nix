@@ -13,17 +13,21 @@
     nixpkgs-2411.url = "github:NixOS/nixpkgs/nixos-24.11";
     home-manager-2411.url = "github:nix-community/home-manager/release-24.11";
     home-manager-2411.inputs.nixpkgs.follows = "nixpkgs-2411";
+
+    nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
+    home-manager-2511.url = "github:nix-community/home-manager/release-25.11";
+    home-manager-2511.inputs.nixpkgs.follows = "nixpkgs-2411";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {
     nixosConfigurations = {
-      lyr00 = inputs.nixpkgs-unstable.lib.nixosSystem {
+      lyr00 = inputs.nixpkgs-2511.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/lyr00
 
-          (import "${inputs.home-manager-unstable}/nixos")
+          (import "${inputs.home-manager-2511}/nixos")
           (import ./home-manager/lyr00.nix {stateVersion = "24.11";})
 
           ./modules/base
@@ -38,13 +42,13 @@
         ];
       };
 
-      vmslippy = inputs.nixpkgs-unstable.lib.nixosSystem {
+      vmslippy = inputs.nixpkgs-2511.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/vmslippy
 
-          (import "${inputs.home-manager-unstable}/nixos")
+          (import "${inputs.home-manager-2511}/nixos")
           (import ./home-manager {stateVersion = "24.11";})
 
           ./modules/base
