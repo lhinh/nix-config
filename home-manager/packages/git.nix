@@ -2,9 +2,9 @@
 {
   home-manager.users.slippy.programs.git = {
     enable = true;
-    userName = "Loc Hinh";
-    userEmail = "lhinh3431@gmail.com";
-    extraConfig.core.editor = "vim";
-    extraConfig.init.defaultBranch = "main";
+    settings.user.name = "Loc Hinh";
+    settings.user.email = "lhinh3431@gmail.com";
+    settings.core.editor = "vim";
+    settings.init.defaultBranch = "main";
   };
 }

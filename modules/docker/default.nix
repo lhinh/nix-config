@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = [
-    pkgs.docker_27
+    pkgs.docker_28
   ];
 }

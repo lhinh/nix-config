@@ -38,14 +38,14 @@
         ];
       };
 
-      vmslippy = inputs.nixpkgs-2405.lib.nixosSystem {
+      vmslippy = inputs.nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/vmslippy
 
-          (import "${inputs.home-manager-2405}/nixos")
-          (import ./home-manager {stateVersion = "24.05";})
+          (import "${inputs.home-manager-unstable}/nixos")
+          (import ./home-manager {stateVersion = "24.11";})
 
           ./modules/base
           ./modules/firefox

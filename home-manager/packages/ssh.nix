@@ -3,17 +3,22 @@
   home-manager.users.slippy.programs.ssh = {
     enable = true;
     package = pkgs.openssh;
-    addKeysToAgent = "yes";
-    extraConfig = ''
-      Host rpi4b
-        HostName 192.168.1.142
-        User slippy
-        IdentityFile ~/.ssh/id_ed25519
+    enableDefaultConfig = false;
 
-      Host discordpi
-        HostName 192.168.1.141
-        User slippy
-        IdentityFile ~/.ssh/id_ed25519
-    '';
+    matchBlocks = {
+      "rpi4b" = {
+        hostname = "192.168.1.142";
+        user = "slippy";
+        identityFile = "~/.ssh/id_ed25519";
+        addKeysToAgent = "yes";
+      };
+
+      "discordpi" = {
+        hostname = "192.168.1.141";
+        user = "slippy";
+        identityFile = "~/.ssh/id_ed25519";
+        addKeysToAgent = "yes";
+      };      
+    };
   };
 }

@@ -10,7 +10,7 @@
         '';
       });
       mutableExtensionsDir = false;
-      extensions = with pkgs.vscode-extensions; [
+      profiles.default.extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         ms-python.python
         redhat.java
