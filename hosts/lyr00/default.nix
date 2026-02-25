@@ -62,7 +62,7 @@
   # Enable Tailscale
   services.tailscale = {
     enable = true;
-  }
+  };
 
   # Set default editor to vim.
   environment.variables.EDITOR = "vim";
