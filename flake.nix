@@ -17,13 +17,13 @@
 
   outputs = inputs@{ self, nixpkgs, ... }: {
     nixosConfigurations = {
-      lyr00 = inputs.nixpkgs-2411.lib.nixosSystem {
+      lyr00 = inputs.nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/lyr00
 
-          (import "${inputs.home-manager-2411}/nixos")
+          (import "${inputs.home-manager-unstable}/nixos")
           (import ./home-manager/lyr00.nix {stateVersion = "24.11";})
 
           ./modules/base
