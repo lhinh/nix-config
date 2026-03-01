@@ -67,6 +67,33 @@
           ./modules/virtualenv
         ];
       };
+
+      titanx = inputs.nixpkgs-2511.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/titanx
+
+          (import "${inputs.home-manager-2511}/nixos")
+          (import ./home-manager {stateVersion = "24.11";})
+
+          ./modules/base
+          ./modules/firefox
+          ./modules/gimp
+          ./modules/gpg
+          ./modules/libreoffice
+          ./modules/java
+          ./modules/maven
+          ./modules/node
+          ./modules/svelte
+          ./modules/code-cursor
+          ./modules/docker
+          ./modules/discord
+          ./modules/python3
+          ./modules/virtualenv
+          ./modules/vscodium
+        ];
+      };
     };
   };
 }
