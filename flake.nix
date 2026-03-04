@@ -2,6 +2,8 @@
   description = "slippy's NixOS configuration";
 
   inputs = {
+    raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix";
+
     nixpkgs-unstable.url = "github:NixOS/nixpkgs";
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
@@ -94,6 +96,23 @@
           ./modules/vscodium
         ];
       };
+
+      lyr4b = inputs.nixpkgs-2511.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/lyr4b
+          (import "${inputs.home-manager-2511}/nixos")
+          (import ./home-manager/lyr4b.nix { stateVersion = "24.11"; })
+          ./modules/base
+          ./modules/rpicam-apps
+          # Apply raspberry-pi-nix libcamera overlay so pkgs has libcamera-apps (rpicam-apps)
+          ({ config, inputs, ... }: {
+            nixpkgs.overlays = [ inputs.raspberry-pi-nix.overlays.libcamera ];
+          })
+        ];
+      };
     };
   };
 }
+
