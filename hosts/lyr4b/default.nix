@@ -33,9 +33,6 @@
     ];
   };
 
-  # Camera access
-  users.users.slippy.extraGroups = [ "video" ];
-
   services.openssh = {
     enable = true;
     ports = [ 22 ];
