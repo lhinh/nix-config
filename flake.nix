@@ -107,12 +107,20 @@
           ./modules/base
           ./modules/rpicam-apps
           # Apply raspberry-pi-nix libcamera overlay so pkgs has libcamera-apps (rpicam-apps)
-          # and disable PipeWire's libcamera SPA plugin (it doesn't build against this libcamera).
+          # and hard-disable PipeWire's libcamera SPA plugin (it doesn't build against this libcamera).
           ({ inputs, ... }: {
             nixpkgs.overlays = [
               inputs.raspberry-pi-nix.overlays.libcamera
               (final: prev: {
-                pipewire = prev.pipewire.override { libcameraSupport = false; };
+                pipewire = prev.pipewire.overrideAttrs (old: {
+                  # Drop libcamera from build inputs
+                  buildInputs =
+                    builtins.filter (pkg: pkg != final.libcamera) old.buildInputs;
+                  # Replace the -Dlibcamera=... meson flag with an explicit "false"
+                  mesonFlags =
+                    builtins.filter (flag: !(final.lib.hasPrefix "-Dlibcamera=" flag)) old.mesonFlags
+                    ++ [ final.lib.mesonEnable "libcamera" false ];
+                });
               })
             ];
           })
