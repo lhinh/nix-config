@@ -7,18 +7,14 @@
 
   # Optional: if your install uses generic extlinux (common on Pi 4)
   #boot.loader.generic-extlinux-compatible.enable = true;
-  hardware = {
-    raspberry-pi."4".apply-overlays-dtmerge.enable = true;
-    deviceTree = {
-      enable = true;
-      filter = "*rpi-4-*.dtb";
-    };
-  };
-  console.enable = false;
+  hardware.raspberry-pi.enable = true;
+
+  # Raspberry Pi specific packages
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
   ];
+
   # Bluetooth
   systemd.services.btattach = {
     before = [ "bluetooth.service" ];
