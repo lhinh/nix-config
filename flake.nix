@@ -107,8 +107,14 @@
           ./modules/base
           ./modules/rpicam-apps
           # Apply raspberry-pi-nix libcamera overlay so pkgs has libcamera-apps (rpicam-apps)
-          ({ config, inputs, ... }: {
-            nixpkgs.overlays = [ inputs.raspberry-pi-nix.overlays.libcamera ];
+          # and disable PipeWire's libcamera SPA plugin (it doesn't build against this libcamera).
+          ({ inputs, ... }: {
+            nixpkgs.overlays = [
+              inputs.raspberry-pi-nix.overlays.libcamera
+              (final: prev: {
+                pipewire = prev.pipewire.override { libcameraSupport = false; };
+              })
+            ];
           })
         ];
       };

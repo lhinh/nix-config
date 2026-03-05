@@ -5,8 +5,9 @@
   # Raspberry Pi 4 kernel (needed for Pi Cam V2 / IMX219)
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
 
-  # Optional: if your install uses generic extlinux (common on Pi 4)
-  #boot.loader.generic-extlinux-compatible.enable = true;
+  # Use extlinux loader (common on non-UEFI Raspberry Pi 4) and disable GRUB
+  boot.loader.grub.enable = false;
+  boot.loader.generic-extlinux-compatible.enable = true;
   hardware.raspberry-pi.enable = true;
 
   # Raspberry Pi specific packages
