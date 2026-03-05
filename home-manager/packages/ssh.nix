@@ -6,8 +6,8 @@
     enableDefaultConfig = false;
 
     matchBlocks = {
-      "rpi4b" = {
-        hostname = "192.168.1.142";
+      "lyr4b" = {
+        hostname = "192.168.1.161";
         user = "slippy";
         identityFile = "~/.ssh/id_ed25519";
         addKeysToAgent = "yes";

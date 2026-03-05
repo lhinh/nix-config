@@ -6,8 +6,9 @@
 
   users.users.slippy = {
     isNormalUser = true;
+    uid = 1000;
     description = "Loc Hinh";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "docker"];
   };
 
   home-manager.useGlobalPkgs = true;

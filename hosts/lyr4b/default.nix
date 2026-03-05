@@ -6,21 +6,32 @@
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
 
   # Optional: if your install uses generic extlinux (common on Pi 4)
-  boot.loader.generic-extlinux-compatible.enable = true;
-
-  # Camera: enable in firmware (config.txt). On some setups this is deprecated
-  # for Pi 4; if camera doesn’t work, add dtoverlay=imx219 to config.txt manually.
-  boot.loader.raspberryPi = {
-    enable = true;
-    version = 4;
-    firmwareConfig = ''
-      camera_auto_detect=1
-    '';
+  #boot.loader.generic-extlinux-compatible.enable = true;
+  hardware = {
+    raspberry-pi."4".apply-overlays-dtmerge.enable = true;
+    deviceTree = {
+      enable = true;
+      filter = "*rpi-4-*.dtb";
+    };
   };
+  console.enable = false;
+  environment.systemPackages = with pkgs; [
+    libraspberrypi
+    raspberrypi-eeprom
+  ];
+  # Bluetooth
+  systemd.services.btattach = {
+    before = [ "bluetooth.service" ];
+    after = [ "dev-ttyAMA0.device" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.bluez}/bin/btattach -B /dev/ttyAMA0 -P bcm -S 3000000";
+    };
+  };
+
 
   # Docker (like lyr00)
   virtualisation.docker.enable = true;
-  users.users.slippy.extraGroups = [ "docker" ];
 
   networking.hostName = "lyr4b";
   networking.firewall = {
@@ -31,17 +42,6 @@
       { from = 8000; to = 8010; }
       { from = 32410; to = 32414; }
     ];
-  };
-
-  services.openssh = {
-    enable = true;
-    ports = [ 22 ];
-    settings = {
-      PasswordAuthentication = false;
-      AllowUsers = [ "slippy" ];
-      X11Forwarding = false;
-      PermitRootLogin = "prohibit-password";
-    };
   };
 
   services.tailscale.enable = true;
